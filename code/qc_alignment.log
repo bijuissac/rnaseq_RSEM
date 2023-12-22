@@ -1,0 +1,152 @@
+Moving to working directory
+Generating RAW fastqc
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+Analysis complete for HBR_Rep1.R1.fastq.gz
+Analysis complete for HBR_Rep1.R2.fastq.gz
+Analysis complete for HBR_Rep2.R1.fastq.gz
+Analysis complete for HBR_Rep2.R2.fastq.gz
+Analysis complete for HBR_Rep3.R1.fastq.gz
+Analysis complete for HBR_Rep3.R2.fastq.gz
+Analysis complete for UHR_Rep1.R1.fastq.gz
+Analysis complete for UHR_Rep1.R2.fastq.gz
+Analysis complete for UHR_Rep2.R1.fastq.gz
+Analysis complete for UHR_Rep2.R2.fastq.gz
+Analysis complete for UHR_Rep3.R1.fastq.gz
+Analysis complete for UHR_Rep3.R2.fastq.gz
+Processing file HBR_Rep1
+Processing file HBR_Rep2
+Processing file HBR_Rep3
+Processing file UHR_Rep1
+Processing file UHR_Rep2
+Processing file UHR_Rep3
+Generating Trimmed fastqc
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+application/octet-stream
+Analysis complete for HBR_Rep1.R1.trimmed_fastq.gz
+Analysis complete for HBR_Rep1.R2.trimmed_fastq.gz
+Analysis complete for HBR_Rep2.R1.trimmed_fastq.gz
+Analysis complete for HBR_Rep2.R2.trimmed_fastq.gz
+Analysis complete for HBR_Rep3.R1.trimmed_fastq.gz
+Analysis complete for HBR_Rep3.R2.trimmed_fastq.gz
+Analysis complete for UHR_Rep1.R1.trimmed_fastq.gz
+Analysis complete for UHR_Rep1.R2.trimmed_fastq.gz
+Analysis complete for UHR_Rep2.R1.trimmed_fastq.gz
+Analysis complete for UHR_Rep2.R2.trimmed_fastq.gz
+Analysis complete for UHR_Rep3.R1.trimmed_fastq.gz
+Analysis complete for UHR_Rep3.R2.trimmed_fastq.gz
+Generating Alignment files
+Aligning file HBR_Rep1
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/HBR_Rep1.R1.trimmed_fastq.gz results/trimmed_fastqs/HBR_Rep1.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/HBR_Rep1_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 06:40:35 ..... started STAR run
+Dec 16 06:40:35 ..... loading genome
+Dec 16 06:40:51 ..... processing annotations GTF
+Dec 16 06:40:51 ..... inserting junctions into the genome indices
+Dec 16 06:41:07 ..... started 1st pass mapping
+Dec 16 06:45:56 ..... finished 1st pass mapping
+Dec 16 06:45:56 ..... inserting junctions into the genome indices
+Dec 16 06:46:02 ..... started mapping
+Dec 16 06:50:52 ..... finished mapping
+Dec 16 06:50:52 ..... started sorting BAM
+Dec 16 06:50:53 ..... finished successfully
+Aligning file HBR_Rep2
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/HBR_Rep2.R1.trimmed_fastq.gz results/trimmed_fastqs/HBR_Rep2.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/HBR_Rep2_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 06:50:53 ..... started STAR run
+Dec 16 06:50:53 ..... loading genome
+Dec 16 06:51:08 ..... processing annotations GTF
+Dec 16 06:51:08 ..... inserting junctions into the genome indices
+Dec 16 06:51:25 ..... started 1st pass mapping
+Dec 16 06:57:17 ..... finished 1st pass mapping
+Dec 16 06:57:17 ..... inserting junctions into the genome indices
+Dec 16 06:57:23 ..... started mapping
+Dec 16 07:03:38 ..... finished mapping
+Dec 16 07:03:38 ..... started sorting BAM
+Dec 16 07:03:39 ..... finished successfully
+Aligning file HBR_Rep3
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/HBR_Rep3.R1.trimmed_fastq.gz results/trimmed_fastqs/HBR_Rep3.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/HBR_Rep3_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 07:03:39 ..... started STAR run
+Dec 16 07:03:39 ..... loading genome
+Dec 16 07:03:53 ..... processing annotations GTF
+Dec 16 07:03:54 ..... inserting junctions into the genome indices
+Dec 16 07:04:09 ..... started 1st pass mapping
+Dec 16 07:09:53 ..... finished 1st pass mapping
+Dec 16 07:09:53 ..... inserting junctions into the genome indices
+Dec 16 07:09:59 ..... started mapping
+Dec 16 07:15:17 ..... finished mapping
+Dec 16 07:15:17 ..... started sorting BAM
+Dec 16 07:15:18 ..... finished successfully
+Aligning file UHR_Rep1
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/UHR_Rep1.R1.trimmed_fastq.gz results/trimmed_fastqs/UHR_Rep1.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/UHR_Rep1_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 07:15:18 ..... started STAR run
+Dec 16 07:15:18 ..... loading genome
+Dec 16 07:15:33 ..... processing annotations GTF
+Dec 16 07:15:33 ..... inserting junctions into the genome indices
+Dec 16 07:15:50 ..... started 1st pass mapping
+Dec 16 07:25:49 ..... finished 1st pass mapping
+Dec 16 07:25:49 ..... inserting junctions into the genome indices
+Dec 16 07:25:56 ..... started mapping
+Dec 16 07:35:59 ..... finished mapping
+Dec 16 07:35:59 ..... started sorting BAM
+Dec 16 07:36:00 ..... finished successfully
+Aligning file UHR_Rep2
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/UHR_Rep2.R1.trimmed_fastq.gz results/trimmed_fastqs/UHR_Rep2.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/UHR_Rep2_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 07:36:00 ..... started STAR run
+Dec 16 07:36:00 ..... loading genome
+Dec 16 07:36:14 ..... processing annotations GTF
+Dec 16 07:36:14 ..... inserting junctions into the genome indices
+Dec 16 07:36:29 ..... started 1st pass mapping
+Dec 16 07:43:17 ..... finished 1st pass mapping
+Dec 16 07:43:17 ..... inserting junctions into the genome indices
+Dec 16 07:43:24 ..... started mapping
+Dec 16 07:50:13 ..... finished mapping
+Dec 16 07:50:13 ..... started sorting BAM
+Dec 16 07:50:14 ..... finished successfully
+Aligning file UHR_Rep3
+	/home/ec2-user/tools/RNASeq_Tools/bin/STAR-avx2 --runThreadN 1 --runMode alignReads --genomeDir data/STAR_references/STAR/2.7.11a/genome --readFilesIn results/trimmed_fastqs/UHR_Rep3.R1.trimmed_fastq.gz results/trimmed_fastqs/UHR_Rep3.R2.trimmed_fastq.gz --twopassMode Basic --sjdbGTFfile data/genome_assembly_files/gencode.v43.primary_assembly.annotation.chr22.gtf --quantMode TranscriptomeSAM GeneCounts --quantTranscriptomeBan IndelSoftclipSingleend --readFilesCommand zcat --outSAMtype BAM SortedByCoordinate --outSAMunmapped Within --outSAMattributes Standard --outFileNamePrefix results/aligned_bams/UHR_Rep3_
+	STAR version: 2.7.11a   compiled: 2023-09-15T02:58:53+0000 :/opt/conda/conda-bld/star_1694746407721/work/source
+Dec 16 07:50:14 ..... started STAR run
+Dec 16 07:50:14 ..... loading genome
+Dec 16 07:50:28 ..... processing annotations GTF
+Dec 16 07:50:28 ..... inserting junctions into the genome indices
+Dec 16 07:50:46 ..... started 1st pass mapping
+Dec 16 07:59:06 ..... finished 1st pass mapping
+Dec 16 07:59:06 ..... inserting junctions into the genome indices
+Dec 16 07:59:13 ..... started mapping
+Dec 16 08:07:36 ..... finished mapping
+Dec 16 08:07:36 ..... started sorting BAM
+Dec 16 08:07:36 ..... finished successfully
+Generating RSEM files
+Processing HBR_Rep1
+Processing HBR_Rep2
+Processing HBR_Rep3
+Processing UHR_Rep1
+Processing UHR_Rep2
+Processing UHR_Rep3
+
+
+Job Finished

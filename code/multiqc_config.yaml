@@ -1,0 +1,29 @@
+module_order:
+    - fastqc:
+        name: 'FastQC (library; raw)'
+        info: 'This section of the report shows FastQC results before adapter trimming.'
+        path_filters:
+            - '*_fastqc.zip'
+        path_filters_exclude:
+            - '*trimmed_fastqc.zip'
+    - cutadapt:
+        name: 'Cutadapt (library; trimmed)'
+        info: 'This section of the report shows the length of trimmed reads by cutadapt.'
+        path_filters:
+            - '*_trimming_report.txt'
+    - fastqc:
+        name: 'FastQC (library; trimmed)'
+        info: 'This section of the report shows FastQC results after adapter trimming.'
+        path_filters:
+            - '*trimmed_fastq_fastqc.zip'
+    - star:
+        name: 'STAR Alignment'
+        info: 'This section of the report shows STAR Aligment Report'
+        path_filters:
+            - '*Log.final.out'
+    - rsem:
+        name: 'RSEM'
+        info: 'This section pf the report summarizes RSEM output'
+        path_filters:
+            - '*.cnt'
+
