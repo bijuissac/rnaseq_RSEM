@@ -1,0 +1,176 @@
+---
+#comment: 'This R markdown is the interview related project code'
+title: 'Code Demo'
+#author: Biju Issac
+#email: bissac@gmail.com
+---
+
+```{r include=FALSE}
+#load R libraries
+library(data.table)
+library(DESeq2)
+library(apeglm)
+library(tidyverse)
+library(ggplot2)
+library(ggrepel)
+library(EnhancedVolcano)
+library("org.Hs.eg.db")
+library("RColorBrewer")
+library(tibble)
+library(pheatmap)
+
+#Working Directory
+workdir <- "/Users/bijuissac/Downloads/RSEM_data/"
+
+```
+
+
+```{r include=FALSE}
+#read in RSEM gene results
+exprs_files <- dir(path = workdir, pattern="genes.results")
+
+#Conditions and Replicates and sample design
+conditions <- c(rep("OverExpressed",3),rep("Control",3))
+replicates <- c("OverExpressed_Rep1","OverExpressed_Rep2","OverExpressed_Rep3","Control_Rep1","Control_Rep2","Control_Rep3")
+features <- data.frame("SampleNames"=replicates,"Treatment"=c(conditions))
+rownames(features) <- replicates
+variables <- "~Treatment"
+
+#define thresholds
+adj.pvalue <- 0.01
+fold.change <- 1.5
+```
+
+```{r include=FALSE}
+#import RSEM data
+#build data frame using expected counts
+countData <- data.frame(fread(paste0(workdir,"/",exprs_files[1])))[c(1,5)]
+for(i in 2:length(exprs_files)){
+	countData <- cbind(countData,data.frame(fread(paste0(workdir,"/",exprs_files[i])))[c(1,5)])
+}
+colnames(countData)[c(seq(2,12,2))] <- c(exprs_files)
+
+#rearrange columns
+countMData <- as.matrix(countData[,c(seq(8,12,2),seq(2,6,2))])
+rownames(countMData) <- as.character(countData[,1])
+colnames(countMData) <- replicates
+
+#round and convert to integer
+countMData = round(countMData)
+```
+
+
+
+```{r include=FALSE}
+#prep for DESeq
+sList <- data.frame(Treatment = factor(c(conditions)))
+dds <- DESeqDataSetFromMatrix(countMData, colData=sList, design= ~Treatment)
+
+
+#run DESeq
+dds <- DESeq(dds)
+vst <- vst(dds)
+rld <- rlog(dds)
+```
+
+```{r}
+#plotPCA and correlation heatmaps on normalized data using top 1000 variable genes
+PCAData <- DESeq2::plotPCA(vst,intgroup=as.character("Treatment"), ntop=1000)
+PCAData
+
+sampleDists <- dist(t(assay(vst)))
+sampleDistMatrix <- as.matrix(sampleDists)
+colors <- colorRampPalette(rev(brewer.pal(9, "Blues")))(255)
+print(pheatmap(sampleDistMatrix,
+         clustering_distance_rows=sampleDists,
+         clustering_distance_cols=sampleDists,
+         col=colors))
+
+```
+
+```{r}
+#results from DE comparison
+DE <- results(dds)
+summary(DE)
+
+DE <- as.data.frame(DE)
+dim(DE)
+
+DE.filtered <- DE[c(grep(TRUE,abs(DE$log2FoldChange) > log(fold.change,2) & DE$padj < adj.pvalue)),]
+dim(DE.filtered)
+
+write.csv(DE.filtered,file="DEGs_RSEM_FC.1.5_adjPval.0.01_filtered.csv")
+
+#convert IDs to Symbols
+DESYM <- as.data.frame(DE)
+DESYM <- tibble::rownames_to_column(DE, "Gene_ID")
+
+cts <- as.data.frame(DESYM)
+cts$Gene_ID_Trimmed <- ''
+#remove version from ensembl ID
+ens <- DESYM$Gene_ID
+ens %<>% as.character %>% gsub("\\.\\d+","",.)
+cts$Gene_ID_Trimmed <- ens
+
+#convert
+gene_symbols <- AnnotationDbi::select(org.Hs.eg.db, keys = ens, columns=c("SYMBOL","GENENAME"), keytype='ENSEMBL')
+
+#merge multiples
+DESYM_ANNO <- merge(cts, gene_symbols, by.x = 'Gene_ID_Trimmed', by.y='ENSEMBL', all = TRUE)
+DESYM_ANNO$Gene_ID_Trimmed <- NULL
+
+#generate volcanoPlot with filter fold.change < 1.5 and adj.pval < 0.01
+keyvals <- ifelse(
+	DESYM_ANNO$log2FoldChange < -1*log(fold.change,2) & DESYM_ANNO$padj < adj.pvalue, 'blue3',
+	ifelse(DESYM_ANNO$log2FoldChange > log(fold.change,2) & DESYM_ANNO$padj < adj.pvalue, 'red3',
+		'grey'))
+
+keyvals[is.na(keyvals)] <- 'grey'
+names(keyvals)[keyvals == 'red3'] <- 'Up regulated'
+names(keyvals)[keyvals == 'blue3'] <- 'Down regulated'
+names(keyvals)[keyvals == 'grey'] <- 'No Significance'
+
+p <- EnhancedVolcano(DESYM_ANNO,
+				lab = DESYM_ANNO$SYMBOL,
+				x = 'log2FoldChange',
+				y = 'pvalue',
+				FCcutoff = FALSE,
+				colCustom = keyvals,
+				colAlpha = 1,
+				title = 'OverExpressed vs Control',
+				pointSize = 3.0,
+				labSize = 6.0,
+				xlim = c(-8,8))
+
+p
+png("Vocano_plot.png",res=200,width=2000,height=2000)
+print(p)
+dev.off()
+```
+
+
+
+```{r}
+sessionInfo()
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
