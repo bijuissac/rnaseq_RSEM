@@ -1,0 +1,1 @@
+This repo generates pre and post trimming QC (FastQC), trims fastq (cutadapt), aligns to reference (STAR) and generates RSEM gene quants. Diiferential expression analysis is performed using DESeq2, PCA and Volcano Plots
